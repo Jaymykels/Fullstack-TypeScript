@@ -1,0 +1,42 @@
+version: "3"
+services:
+    client:
+        depends_on: 
+            - server
+        restart: on-failure
+        build:
+            context: ./react-client
+            dockerfile: Dockerfile.dev
+        ports:
+            - '3000:3000'
+        container_name: react_client
+        volumes:
+            - /app/node_modules
+            - ./react-client:/app
+      
+    server:
+        depends_on:
+            - db
+        restart: on-failure
+        build:
+            context: ./nest-server
+            dockerfile: Dockerfile.dev
+        ports:
+            - '3001:3001'
+        container_name: nest_server
+        volumes:
+            - /app/node_modules
+            - ./nest-server:/app
+        environment:
+            - DB_URL=mongodb://mongo_db
+                
+    db:
+        image: mongo
+        container_name: mongo_db
+        volumes:
+            - mongodata:/data/db
+        ports:
+            - '27017:27017'
+
+volumes:
+    mongodata:
