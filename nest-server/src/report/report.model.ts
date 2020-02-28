@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
 export const ReportSchema = new mongoose.Schema({
     name: String,
@@ -26,13 +27,22 @@ export interface Report extends mongoose.Document {
 }
 
 export class ReportDTO {
+    @ApiProperty()
     name: string;
+    @ApiProperty()
     type: string;
+    @ApiProperty()
     period: string;
+    @ApiProperty()
     Year: number;
+    @ApiProperty()
     Assignee: string;
+    @ApiProperty()
     Deadline: string;
+    @ApiProperty()
     Submitted: boolean;
+    @ApiProperty()
     url: string;
+    @ApiProperty()
     companyId?: string
 }
