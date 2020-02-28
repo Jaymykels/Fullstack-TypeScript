@@ -22,7 +22,7 @@ services:
             context: ./nest-server
             dockerfile: Dockerfile.dev
         ports:
-            - '3001:3001'
+            - '5000:5000'
         container_name: nest_server
         volumes:
             - /app/node_modules
