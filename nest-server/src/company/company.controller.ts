@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { AppService } from 'src/app.service';
 import { Company, CompanyDTO } from './company.model';
 import { CompanyService } from './company.service';
 
