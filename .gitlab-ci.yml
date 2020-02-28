@@ -1,0 +1,17 @@
+image: tmaier/docker-compose:latest
+
+stages:
+    - test
+    
+services:
+    - docker:dind
+
+before_script:
+    - docker info
+    - docker-compose --version
+
+test:
+    stage: test
+    script:
+        - docker-compose run server yarn test --forceExit
+        - docker-compose run server yarn test:e2e --forceExit
