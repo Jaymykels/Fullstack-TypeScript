@@ -1,24 +1,25 @@
-image: node:10-alpine
+image: tmaier/docker-compose:latest
 
 stages:
     - build
     - test
+    
+services:
+    - docker:dind
 
-cache:
-    paths:
-    - nest-server/node_modules/
+before_script:
+    - docker info
+    - docker-compose --version
 
-install_dependencies:
+build:
     stage: build
+    tags:
+        - docker
     script:
-        - cd nest-server
-        - yarn
-    artifacts:
-        paths:
-            - nest-server/node_modules/
+        - docker-compose build
 
 test:
     stage: test
     script:
-        - cd nest-server 
-        - yarn test
+        - docker-compose run server yarn test --forceExit
+        - docker-compose run server yarn test:e2e --forceExit
