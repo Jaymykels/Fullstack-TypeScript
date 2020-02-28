@@ -9,6 +9,14 @@ describe('Company Controller', () => {
   let companyController: CompanyController;
   let companyService: CompanyService;
 
+  const company : Company = {
+    name: 'Stears Business Ltd',
+    address: '8a Sir Samuel Manuwa, Victoria Island, Lagos',
+    email: 'talktome@stearsng.com',
+    description: 'Stears Business, our publishing arm, provides business news analysis and insight through its network of journalists and professionals in banking, consulting, law, academia, government and civil society. Our Writer’s Network includes writers based in Nigeria, Canada, United States and the United Kingdom.',
+    reports: [1,2,10]
+  }
+
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [AppModule, CompanyModule]
@@ -19,15 +27,14 @@ describe('Company Controller', () => {
   });
   
   it('should call company service to create a company', async () => {
-    const company : Company = {
-      name: 'Stears Business Ltd',
-      address: '8a Sir Samuel Manuwa, Victoria Island, Lagos',
-      email: 'talktome@stearsng.com',
-      description: 'Stears Business, our publishing arm, provides business news analysis and insight through its network of journalists and professionals in banking, consulting, law, academia, government and civil society. Our Writer’s Network includes writers based in Nigeria, Canada, United States and the United Kingdom.',
-      reports: [1,2,10]
-    }
     jest.spyOn(companyService, 'createCompany').mockImplementation(() => Promise.resolve(company));
 
     expect(await companyController.store(company)).toBe(company);
+  });
+
+  it('should call company service to get a company', async () => {
+    jest.spyOn(companyService, 'getCompany').mockImplementation(() => Promise.resolve(company));
+
+    expect(await companyController.find('weqwewrr')).toBe(company);
   });
 });
