@@ -1,7 +1,6 @@
 image: tmaier/docker-compose:latest
 
 stages:
-    - build
     - test
     
 services:
@@ -10,13 +9,6 @@ services:
 before_script:
     - docker info
     - docker-compose --version
-
-build:
-    stage: build
-    tags:
-        - docker
-    script:
-        - docker-compose build
 
 test:
     stage: test
