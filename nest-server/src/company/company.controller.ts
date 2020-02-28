@@ -12,4 +12,9 @@ export class CompanyController {
         const company = await this.companyService.createCompany(params)
         return company
     }
+
+    @Get(':id') 
+    find(@Param('id') id): Promise<Company|string> {
+        return this.companyService.getCompany(id)
+    }
 }
