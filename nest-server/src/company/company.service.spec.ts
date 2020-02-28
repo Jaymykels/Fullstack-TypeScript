@@ -45,4 +45,12 @@ describe('CompanyService', () => {
 
     expect(result.toString()).toContain(newCompany.id)
   });
+
+  it('should update company report', async () => {
+    const newCompany = await service.createCompany(company);
+    const reportId = 'hjh4j3h4uh22'
+    const result = await service.updateReports(newCompany.id, reportId);
+
+    expect(result.toString()).toContain(reportId);
+  });
 });

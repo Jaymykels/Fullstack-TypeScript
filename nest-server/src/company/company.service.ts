@@ -26,8 +26,22 @@ export class CompanyService {
     try {
       company = await this.companyModel.findOne({ _id: id})
     } catch (error) {
-      throw new NotFoundException('Could not find company.');
+      throw new NotFoundException('Could not find company');
     }
     return company;
+  }
+
+  async updateReports(id: string, reportId: string): Promise<Company|string> {
+    try {
+      const company = await this.findCompany(id)
+      if(company.reports){
+        !company.reports.includes(reportId) && company.reports.push(reportId);
+      } else {
+        company.reports = [reportId];
+      }
+      return this.companyModel.findByIdAndUpdate(id, company, { new: true});
+    } catch (error) {
+      return 'Could not find company'
+    }
   }
 }

@@ -14,7 +14,7 @@ export interface Company extends mongoose.Document {
     address: string,
     email: string,
     description: string,
-    reports: number[]
+    reports: any[]
 }
 
 export class CompanyDTO {
@@ -22,5 +22,5 @@ export class CompanyDTO {
     address: string;
     email: string;
     description: string;
-    reports: number[];
+    reports: any[];
 }
