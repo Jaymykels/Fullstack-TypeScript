@@ -44,4 +44,19 @@ describe('ReportController (e2e)', () => {
       })
       .expect(HttpStatus.CREATED);
   });
+
+  it('Be able to get a list of all reports with GET /reports', async () => {
+    const newReport = await reportService.createReport(report)
+    return request(app.getHttpServer())
+      .get('/reports')
+      // .expect(({ body }) => {
+      //   expect(body).toEqual(
+      //     expect.arrayContaining([
+      //       expect.objectContaining({_id: newReport.id})
+      //     ])
+      //   );
+      // })
+      .expect(HttpStatus.OK);
+  });
+
 });
