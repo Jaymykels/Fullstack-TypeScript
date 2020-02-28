@@ -1,15 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CompanyService } from './company.service';
 import { Company } from './company.model';
-import { AppModule } from '../app.module';
 import { CompanyModule } from './company.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 describe('CompanyService', () => {
   let service: CompanyService;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, CompanyModule]
+      imports: [CompanyModule, MongooseModule.forRootAsync({
+        useFactory: async () => {
+          const mongod = new MongoMemoryServer();
+          const uri = await mongod.getConnectionString();
+          return {
+            uri: uri
+          }
+        }
+      })]
     }).compile();
 
     service = app.get<CompanyService>(CompanyService);

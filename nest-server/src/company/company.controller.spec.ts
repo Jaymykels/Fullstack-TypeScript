@@ -3,7 +3,8 @@ import { CompanyController } from './company.controller';
 import { CompanyService } from './company.service';
 import { Company } from './company.model';
 import { CompanyModule } from './company.module';
-import { AppModule } from '../app.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 describe('Company Controller', () => {
   let companyController: CompanyController;
@@ -11,7 +12,15 @@ describe('Company Controller', () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, CompanyModule]
+      imports: [CompanyModule, MongooseModule.forRootAsync({
+        useFactory: async () => {
+          const mongod = new MongoMemoryServer();
+          const uri = await mongod.getConnectionString();
+          return {
+            uri: uri
+          }
+        }
+      })]
     }).compile();
 
     companyService = app.get<CompanyService>(CompanyService);
