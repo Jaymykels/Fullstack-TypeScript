@@ -1,0 +1,22 @@
+image: node:10-alpine
+
+stages:
+    - build
+    - test
+
+cache:
+    paths:
+    - nest-server/node_modules/
+
+install_dependencies:
+    stage: build
+    script:
+        - cd nest-server
+        - yarn
+    artifacts:
+        paths:
+            - nest-server/node_modules/
+
+test:
+    stage: test
+    script: yarn test
