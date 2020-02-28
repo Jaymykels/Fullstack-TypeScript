@@ -41,4 +41,15 @@ describe('ReportService', () => {
     await reportService.createReport({...report, companyId: '1'});
     expect(company).toHaveBeenCalled();
   })
+
+  it('should get reports', async () => {
+    const newReport= await reportService.createReport(report);
+    const reports = await reportService.getReports({});
+
+    expect(reports).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({_id: newReport.id})
+      ])
+    );
+  });
 });
