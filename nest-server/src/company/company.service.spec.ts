@@ -6,6 +6,14 @@ import { CompanyModule } from './company.module';
 
 describe('CompanyService', () => {
   let service: CompanyService;
+  
+  const company : Company = {
+    name: 'Stears Business Ltd',
+    address: '8a Sir Samuel Manuwa, Victoria Island, Lagos',
+    email: 'talktome@stearsng.com',
+    description: 'Stears Business, our publishing arm, provides business news analysis and insight through its network of journalists and professionals in banking, consulting, law, academia, government and civil society. Our Writer’s Network includes writers based in Nigeria, Canada, United States and the United Kingdom.',
+    reports: [1,2,10]
+  }
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -20,15 +28,21 @@ describe('CompanyService', () => {
   });
 
   it('should create company', async () => {
-    const company : Company = {
-      name: 'Stears Business Ltd',
-      address: '8a Sir Samuel Manuwa, Victoria Island, Lagos',
-      email: 'talktome@stearsng.com',
-      description: 'Stears Business, our publishing arm, provides business news analysis and insight through its network of journalists and professionals in banking, consulting, law, academia, government and civil society. Our Writer’s Network includes writers based in Nigeria, Canada, United States and the United Kingdom.',
-      reports: [1,2,10]
-    }
     const newCompany = await service.createCompany(company);
 
     expect(newCompany).toMatchObject(company);
+  });
+
+  it('should return message if company with id does not exist', async () => {
+    const result = await service.getCompany('1');
+
+    expect(result).toBe('Could not find company');
+  });
+
+  it('should find company by id', async () => {
+    const newCompany = await service.createCompany(company);
+    const result = await service.getCompany(newCompany.id);
+
+    expect(result.toString()).toContain(newCompany.id)
   });
 });
