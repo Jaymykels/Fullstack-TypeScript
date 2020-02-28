@@ -16,4 +16,8 @@ export class ReportService {
             this.companyService.updateReports(report.companyId, result._id)
         return {...report, id: result._id}
     }
+
+    async getReports(query:any): Promise<Report[]> {
+        return this.reportModel.find(query);
+    }
 }
