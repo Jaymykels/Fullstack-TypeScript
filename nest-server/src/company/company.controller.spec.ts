@@ -37,4 +37,11 @@ describe('Company Controller', () => {
 
     expect(await companyController.find('weqwewrr')).toBe(company);
   });
+
+  it('should call company service to get companies', async () => {
+    const getCompanies = jest.spyOn(companyService, 'getCompanies');
+
+    await companyController.index()
+    expect(getCompanies).toHaveBeenCalled();
+  });
 });

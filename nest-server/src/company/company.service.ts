@@ -44,4 +44,8 @@ export class CompanyService {
       return 'Could not find company'
     }
   }
+
+  async getCompanies(): Promise<Company[]> {
+    return this.companyModel.find();
+  }
 }
