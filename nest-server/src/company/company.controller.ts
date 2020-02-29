@@ -16,4 +16,9 @@ export class CompanyController {
     find(@Param('id') id): Promise<Company|string> {
         return this.companyService.getCompany(id)
     }
+
+    @Get()
+    index(): Promise<Company[]> {
+        return this.companyService.getCompanies()
+    }
 }

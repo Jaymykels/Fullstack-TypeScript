@@ -52,4 +52,18 @@ describe('CompanyController (e2e)', () => {
       })
       .expect(HttpStatus.OK);
   });
+
+  it('Be able to get a list of all companies with GET /companies', async () => {
+    const newCompany = await companyService.createCompany(company)
+    return request(app.getHttpServer())
+      .get('/companies')
+      // .expect(({ body }) => {
+      //   expect(body).toEqual(
+      //     expect.arrayContaining([
+      //       expect.objectContaining({_id: newReport.id})
+      //     ])
+      //   );
+      // })
+      .expect(HttpStatus.OK);
+  });
 });

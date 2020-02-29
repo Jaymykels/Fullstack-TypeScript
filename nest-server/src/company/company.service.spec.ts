@@ -53,4 +53,11 @@ describe('CompanyService', () => {
 
     expect(result.toString()).toContain(reportId);
   });
+
+  it('should get companies', async () => {
+    const newCompany= await service.createCompany(company);
+    const companies = await service.getCompanies();
+
+    expect(companies.toString()).toContain(newCompany.id)
+  });
 });

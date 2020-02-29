@@ -35,7 +35,7 @@ describe('Report Controller', () => {
     expect(await reportController.store(report)).toBe(report);
   });
 
-  it('should call report service to get a reports', async () => {
+  it('should call report service to get reports', async () => {
     const getReports = jest.spyOn(reportService, 'getReports')
     const query = {}
     await reportController.index(query)
