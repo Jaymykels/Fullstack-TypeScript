@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import CompanyCard from '../components/CompanyCard';
+import CompanyCard, { CompanyCardProps } from '../components/CompanyCard';
 import { getCompanies } from '../requests';
 import Search from '../components/Search';
+import { Link } from 'react-router-dom';
 
 export interface HomeProps {
 
 }
 
 const Home: React.SFC<HomeProps> = () => {
-    const [companies, setCompanies] = useState([]);
+    const [companies, setCompanies] = useState<CompanyCardProps[]>([]);
     const [initialized, setInitialized] = useState(false);
 
     const getData = async () => {
@@ -30,7 +31,7 @@ const Home: React.SFC<HomeProps> = () => {
             </h1>)}
 
             <div className="mt-6">
-                {initialized && companies.map((company, index) => <CompanyCard key={index} {...company} />)}
+                {initialized && companies.map((company, index) => <Link to={`/details/${company._id}`}><CompanyCard key={index} {...company} /> </Link>)}
             </div>
         </div>
     );

@@ -48,4 +48,8 @@ export class CompanyService {
   async getCompanies(): Promise<Company[]> {
     return this.companyModel.find();
   }
+
+  async dropDatabase(): Promise<void> {
+    this.companyModel.deleteMany({}, err => err && console.log(err))
+  }
 }

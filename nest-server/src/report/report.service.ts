@@ -20,4 +20,8 @@ export class ReportService {
     async getReports(query:any): Promise<Report[]> {
         return this.reportModel.find(query);
     }
+
+    async dropDatabase(): Promise<void> {
+        this.reportModel.deleteMany({}, err => err && console.log(err))
+      }
 }

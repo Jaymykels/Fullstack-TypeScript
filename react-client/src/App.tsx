@@ -1,7 +1,8 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route, Link, Switch } from 'react-router-dom';
 import { createBrowserHistory as createHistory } from "history";
 import Home from './pages/Home';
+import Details from './pages/Details';
 
 const history = createHistory();
 
@@ -19,13 +20,22 @@ const App: React.FC = () => {
             </div>
           </div>
           {/* Main */}
-          <Route
-            path="/"
-            exact
-            component={(props: any) => (
-              <Home {...props}/>
-            )}
-          />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={(props: any) => (
+                <Home {...props}/>
+              )}
+            />
+            <Route
+              path="/details/:companyId"
+              exact
+              component={(props: any) => (
+                <Details {...props}/>
+              )}
+            />
+          </Switch>
         </Router>
       </div>
     </div>

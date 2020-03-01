@@ -32,3 +32,11 @@ $ docker-compose run server yarn test:integration --forceExit
 ## Usage
 
 Navigate to `http://localhost:5000/api` and browse the swagger api documentation
+
+Navigate to `http://localhost:3000` and browse the application
+
+## Bonus
+```bash
+# seed the database with dummy data
+$ docker-compose run server yarn seed
+```
