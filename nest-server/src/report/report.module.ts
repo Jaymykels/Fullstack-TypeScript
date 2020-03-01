@@ -8,6 +8,7 @@ import { CompanyModule } from '../company/company.module';
 @Module({
   imports: [CompanyModule, MongooseModule.forFeature([{ name: 'Report', schema: ReportSchema}])],
   controllers: [ReportController],
-  providers: [ReportService]
+  providers: [ReportService],
+  exports: [ReportService]
 })
 export class ReportModule {}

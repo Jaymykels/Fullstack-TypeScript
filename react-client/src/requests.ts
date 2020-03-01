@@ -1,4 +1,9 @@
 import axios from 'axios'
-const APIURL = 'http://localhost:5000';
+const APIURL = process.env.REACT_APP_APIURL;
 
 export const getCompanies = () => axios.get(`${APIURL}/companies`);
+
+export const fetchCompanyReports = (id: string) => axios.all([
+    axios.get(`${APIURL}/companies/${id}`),
+    axios.get(`${APIURL}/reports?companyId=${id}&Year=2020`)
+])
