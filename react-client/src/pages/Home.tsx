@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CompanyCard, { CompanyCardProps } from '../components/CompanyCard';
 import { getCompanies } from '../requests';
 import Search from '../components/Search';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 export interface HomeProps {
 
@@ -11,6 +12,7 @@ export interface HomeProps {
 const Home: React.SFC<HomeProps> = () => {
     const [companies, setCompanies] = useState<CompanyCardProps[]>([]);
     const [initialized, setInitialized] = useState(false);
+    const history = useHistory()
 
     const getData = async () => {
         const response = await getCompanies();
@@ -18,20 +20,21 @@ const Home: React.SFC<HomeProps> = () => {
         setInitialized(true)
     };
 
+    const onSearch = (keyword: string) => {
+        history.push(`/results/${keyword}`)
+    }
+
     useEffect(() => {
         getData()
     }, [])
 
     return (
         <div>
-            {!initialized && (
-            <h1 className="text-gray-800 text-center lg:pl-10 lg:text-4xl text-xl font-semibold">
-                {/* Searching for <span className="text-gray-500">keyword</span> */}
-                Loading...
-            </h1>)}
+            <Search isResult={false} search={onSearch}/>
+            {!initialized && <Loading/>}
 
-            <div className="mt-6">
-                {initialized && companies.map((company, index) => <Link to={`/details/${company._id}`}><CompanyCard key={index} {...company} /> </Link>)}
+            <div className="my-6">
+                {initialized && companies.map((company, index) => <Link to={`/details/${company._id}`} key={index}><CompanyCard {...company} /> </Link>)}
             </div>
         </div>
     );

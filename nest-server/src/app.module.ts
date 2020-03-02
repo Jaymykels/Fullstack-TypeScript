@@ -11,7 +11,7 @@ import { SeedCommand } from './seeder.command';
 @Module({
   imports: [ConfigModule.forRoot(), CompanyModule, ReportModule, CommandModule, MongooseModule.forRoot(process.env.DB_URL)],
   controllers: [AppController],
-  providers: [AppService, SeedCommand],
+  providers: [AppService, SeedCommand]
 })
 export class AppModule {}
  

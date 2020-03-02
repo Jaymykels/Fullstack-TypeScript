@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject, forwardRef } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Company } from './company.model';
 import { Model } from 'mongoose'
@@ -31,7 +31,7 @@ export class CompanyService {
     return company;
   }
 
-  async updateReports(id: string, reportId: string): Promise<Company|string> {
+  async updateReports(id: string, reportId: string): Promise<Company> {
     try {
       const company = await this.findCompany(id)
       if(company.reports){
@@ -41,7 +41,7 @@ export class CompanyService {
       }
       return this.companyModel.findByIdAndUpdate(id, company, { new: true});
     } catch (error) {
-      return 'Could not find company'
+      console.log('Could not find company')
     }
   }
 
@@ -50,6 +50,6 @@ export class CompanyService {
   }
 
   async dropDatabase(): Promise<void> {
-    this.companyModel.deleteMany({}, err => err && console.log(err))
+    await this.companyModel.deleteMany({}, err => err && console.log(err))
   }
 }

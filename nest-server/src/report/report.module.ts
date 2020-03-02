@@ -6,7 +6,7 @@ import { ReportSchema } from './report.model';
 import { CompanyModule } from '../company/company.module';
 
 @Module({
-  imports: [CompanyModule, MongooseModule.forFeature([{ name: 'Report', schema: ReportSchema}])],
+  imports: [MongooseModule.forFeature([{ name: 'Report', schema: ReportSchema}]), CompanyModule],
   controllers: [ReportController],
   providers: [ReportService],
   exports: [ReportService]

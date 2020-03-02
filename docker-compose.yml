@@ -19,6 +19,7 @@ services:
     server:
         depends_on:
             - db
+            - kibana
         restart: on-failure
         build:
             context: ./nest-server
@@ -31,6 +32,8 @@ services:
             - ./nest-server:/app
         environment:
             - DB_URL=mongodb://mongo_db
+            - ELASTIC_HOST=http://localhost:9200
+
                 
     db:
         image: mongo
@@ -40,5 +43,37 @@ services:
         ports:
             - '27017:27017'
 
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+        container_name: elasticsearch
+        environment:
+            - xpack.security.enabled=false
+            - discovery.type=single-node
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+            nofile:
+                soft: 65536
+                hard: 65536
+        cap_add:
+            - IPC_LOCK
+        volumes:
+            - elasticsearch-data:/usr/share/elasticsearch/data
+        ports:
+            - 9200:9200
+            - 9300:9300
+    
+    kibana:
+        container_name: kibana
+        image: docker.elastic.co/kibana/kibana:7.4.0
+        environment:
+            - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+        ports:
+            - 5601:5601
+        depends_on:
+            - elasticsearch
+            
 volumes:
     mongodata:
+    elasticsearch-data:
