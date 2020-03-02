@@ -3,6 +3,7 @@ import { Router, Route, Link, Switch } from 'react-router-dom';
 import { createBrowserHistory as createHistory } from "history";
 import Home from './pages/Home';
 import Details from './pages/Details';
+import SearchResult from './pages/SearchResult';
 
 const history = createHistory();
 
@@ -33,6 +34,13 @@ const App: React.FC = () => {
               exact
               component={(props: any) => (
                 <Details {...props}/>
+              )}
+            />
+            <Route
+              path="/results/:keyword"
+              exact
+              component={(props: any) => (
+                <SearchResult {...props}/>
               )}
             />
           </Switch>

@@ -11,6 +11,7 @@ export const CompanySchema = new mongoose.Schema({
 
 export interface Company extends mongoose.Document {
     id?: string,
+    _id?: string,
     name: string,
     address: string,
     email: string,

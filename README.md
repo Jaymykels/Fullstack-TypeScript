@@ -35,6 +35,8 @@ Navigate to `http://localhost:5000/api` and browse the swagger api documentation
 
 Navigate to `http://localhost:3000` and browse the application
 
+Navigate to `http://localhost:5601` to access kibana
+
 ## Bonus
 ```bash
 # seed the database with dummy data

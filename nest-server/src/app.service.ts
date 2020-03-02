@@ -62,7 +62,7 @@ export class AppService {
       for (let j = 0; j < numReports; j++) {
         const report: Report = {
           name: `${newCompany.name} report #${j}`,
-          type: "balance-sheet",
+          type: ['balance-sheet', 'budget-report'][Math.floor(Math.random()*2)],
           period: `Q${j}`,
           Year: [2020, 2019, 2018][Math.floor(Math.random()*3)],
           Assignee: 'Michael Ezeokoye',
