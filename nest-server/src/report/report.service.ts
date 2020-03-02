@@ -24,12 +24,16 @@ export class ReportService {
             var company: Company = await this.companyService.updateReports(report.companyId, result._id)
             company && (body['companyName'] = company.name)
         }
-        await this.elascticClient.index({
-            index: 'reports',
-            type: 'reports',
-            id: result.id,
-            body
-        })
+        try {
+            await this.elascticClient.index({
+                index: 'reports',
+                type: 'reports',
+                id: result.id,
+                body
+            })
+        } catch (error) {
+            console.log(error)
+        }
         return { ...report, id: result._id }
     }
 

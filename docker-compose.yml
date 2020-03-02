@@ -19,7 +19,7 @@ services:
     server:
         depends_on:
             - db
-            - elasticsearch
+            - kibana
         restart: on-failure
         build:
             context: ./nest-server
@@ -74,7 +74,6 @@ services:
         depends_on:
             - elasticsearch
             
-
 volumes:
     mongodata:
     elasticsearch-data:
