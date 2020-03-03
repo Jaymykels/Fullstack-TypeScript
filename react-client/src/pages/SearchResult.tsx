@@ -25,7 +25,7 @@ const SearchResult: React.SFC<SearchResultProps> = ({match}) => {
 
     useEffect(() => {
         search(match.params.keyword);
-    })
+    },[])
 
     return ( 
         <div className="mb-16">
