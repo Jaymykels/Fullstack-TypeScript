@@ -15,7 +15,7 @@ $ docker-compose build
 ## Running the app
 
 ```bash
-$ docker-compose-up
+$ docker-compose-up -d
 ```
 
 ## Test

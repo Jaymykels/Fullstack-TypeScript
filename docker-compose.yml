@@ -14,7 +14,7 @@ services:
             - /app/node_modules
             - ./react-client:/app
         environment: 
-            - REACT_APP_APIURL=http://localhost:5000
+            - REACT_APP_APIURL=http://nest_server:5000
       
     server:
         depends_on:
@@ -32,7 +32,7 @@ services:
             - ./nest-server:/app
         environment:
             - DB_URL=mongodb://mongo_db
-            - ELASTIC_HOST=http://localhost:9200
+            - ELASTIC_HOST=http://elasticsearch:9200
 
                 
     db:
