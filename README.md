@@ -2,9 +2,11 @@
   <h1>Fullstack TypeScript</h1>
 </p>
   
-  <p align="center">Built with TypeScript, Nestjs, Reactjs, MongoDB and Docker.</p>
-    <p align="center">
+<p align="center">Built with TypeScript, Nestjs, Reactjs, MongoDB and Docker.</p>
 
+## Dependencies
+
+Install [Docker]('https://www.docker.com/products/docker-desktop)
 
 ## Installation
 
@@ -15,7 +17,7 @@ $ docker-compose build
 ## Running the app
 
 ```bash
-$ docker-compose-up -d
+$ docker-compose-up
 ```
 
 ## Test
