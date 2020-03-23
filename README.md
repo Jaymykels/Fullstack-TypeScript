@@ -2,7 +2,7 @@
   <h1>Fullstack TypeScript</h1>
 </p>
   
-<p align="center">Built with TypeScript, Nestjs, Reactjs, MongoDB and Docker.</p>
+<p align="center">Built with TypeScript, Nestjs, Reactjs, MongoDB, Elasticsearch and Docker.</p>
 
 ## Dependencies
 
